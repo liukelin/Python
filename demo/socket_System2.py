@@ -10,7 +10,7 @@ import socket     #socket模块
 import commands   #执行系统命令模块
 import threading
 
-HOST = '192.168.179.130' # 127.0.0.1
+HOST = '127.0.0.1' # 127.0.0.1
 PORT = 50007 #端口
 listNum = 50 #支持最多线程数
 timeOut = 500 #进程超时时间
