@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import json
+import os
 
 print "hello python"
 
@@ -31,6 +32,7 @@ x = [x,y]
 y = x[0]
 x = x[1]
 print "x:%s, y:%s" %(x,y)
+
 
 
 
