@@ -37,6 +37,7 @@ def new_pid(r,key):
     except:
         pool = redis.ConnectionPool(**redis_conf['default'])
         r = redis.Redis(connection_pool=pool)
+        pid = r.incr(key)
     return pid if pid else 0
 
 #
@@ -125,7 +126,7 @@ def go(threadNum, outTime=60):
     return True
 
 if __name__ == '__main__':
-    outTime = 20   # 运行时间
+    outTime = 20  # 运行时间
     threadNo = 20 # 线程数
 
     data = {}
