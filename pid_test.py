@@ -11,7 +11,7 @@ import MySQLdb
 
 redis_conf = {
         'default':{
-             'host': "127.0.0.1",
+             'host': '127.0.0.1',
              'port': 6379,
              'db': 0,
          }
@@ -24,7 +24,7 @@ db_conf = {
             'passwd':'123456',
             'db':'k_kelin',
             'charset':'utf8'
-        },
+        }
     }
 
 #
@@ -113,7 +113,7 @@ def go(threadNum, outTime=60):
         ret = 0
         # ret = set_pid(pid, threadNum)
         data[threadNum].append({'pid':pid, 'threadNum':threadNum , 'time':int(time.time()) }) #区分各线程变量
-        if len(data[threadNum]) >= 10000: # 5千入库一次 
+        if len(data[threadNum]) >= 5000: # 5千入库一次 
             ret = set_pid_batch(data[threadNum])
             data[threadNum] = []
 

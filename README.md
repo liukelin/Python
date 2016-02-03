@@ -1,4 +1,4 @@
- ========= pid_test.py =========
+ == pid_test.py ==
 
  并发下唯一ID的生成规则 (python 多线程模拟并发 ，QPS以秒为单位， 不考虑 python GIL)
 
@@ -35,7 +35,7 @@
 
 
 
- ========= /demo/get_all_image.py =========
+ == /demo/get_all_image.py ==
  多线程 获取本计算机下所有图片并保存
 
 
