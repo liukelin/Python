@@ -50,7 +50,7 @@ def set_pid_batch(olist):
     sql = ''
     for i in olist:
         if i['pid'] == 0:
-            pass
+            continue
         sql += "(%s,%s,%s)," % ( i['pid'], i['time'], i['threadNum'])
     if sql == '':
         return ret
