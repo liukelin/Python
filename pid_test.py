@@ -60,12 +60,12 @@ def set_pid_batch(olist):
 
     db = db_conf['default']
     conn = MySQLdb.connect(
-        host        = db['host'],
-        user        = db['user'],
+        host    = db['host'],
+        user    = db['user'],
         passwd  = db['passwd'],
-        db           = db['db'],
-        port        = db['port'],
-        charset   = db['charset']
+        db      = db['db'],
+        port    = db['port'],
+        charset = db['charset']
     )
     cur = conn.cursor()
     ret = cur.execute(sql)
