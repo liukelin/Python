@@ -13,13 +13,14 @@ import threading
 dir_ = os.getcwd()
 
 def set_logs(msg,file=''):
+    # return
     logStr = "[%s]%s\r\n" %(time.strftime("%Y-%m-%d %H:%M:%S"),msg)
     file = file if file!='' else dir_
     f = open('%s/logs.log' % file,'a')
     f.write(logStr)
     f.close()
 
-def get_img(url, begin_page, end_page, dir , threadNum , threadNo=None):
+def get_img(url, page, dir , threadNum , threadNo=None):
 
     set_logs('开始抓取:%s.' % threadNo)
 
@@ -27,10 +28,12 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo=None):
     # http_pool = urllib3.HTTPConnectionPool('wanimal1983.tumblr.com') 
     http = urllib3.PoolManager()
 
-    for i in range(begin_page, end_page + 1):
+    k=0
+    for i in page:
+        k+=1
 
         if threadNo:
-            if i%threadNum != threadNo: 
+            if (k-1)%threadNum != threadNo: 
                 continue
 
         findNum = 0 #匹配图片
@@ -39,10 +42,10 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo=None):
         # m = urllib.request.urlopen(url+str(i)).read() 
         # m = http_pool.urlopen('GET',url+str(i) ,redirect=False)
         try:
-            r = http.request('GET', url+str(i))
+            r = http.request('GET', url)
         except:
             http = urllib3.PoolManager()
-            r = http.request('GET', url+str(i))
+            r = http.request('GET', url)
 
         m = r.data
         # print(m)
@@ -56,10 +59,15 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo=None):
             os.makedirs(new_path)  
         '''
         page_data = m.decode('UTF-8')
+
+
+        set_logs(page_data)
+
         page_image = re.compile('<img src=\"(.+?)\"')    #匹配img正则
         for image in page_image.findall(page_data): 
 
-            pattern = re.compile(r'^http://.*.jpg$')  # 判断刷选图片
+            print(image)
+            pattern = re.compile(r'^http://.*$')  # 判断刷选图片
             if pattern.match(image):
                 findNum += 1
                 try: 
@@ -95,20 +103,24 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo=None):
 
 if __name__ == "__main__":
 
-    # 抓取网址   
-    url = "http://wanimal1983.tumblr.com/page/" 
-    # 保存位置
-    dir_ = '/Users/liukelin/Desktop/WANIMAL2'
+    urls ={
+            'url' : 'http://www.chrismanstudios.com/',
+            'dir' : '/Volumes/Liukelin/photos/www.chrismanstudios.com',
+
+
+
+        }
+
     #statr page
     begin_page = 1
     # end page
-    end_page = 122
+    end_page = 10
     # 总线程数 
-    threadNum = 5
+    threadNum = 10
 
     threads = []
     for i in range(0, threadNum):
-        t = threading.Thread( target=get_img,name='get_img' ,args=(url, begin_page, end_page, dir_ , threadNum , i ) )
+        t = threading.Thread( target=get_img, name='get_img', args=(urls['url'], begin_page, end_page, urls['dir'], threadNum, i ) )
         threads.append(t)
     
     for t in threads:
