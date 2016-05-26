@@ -1,6 +1,6 @@
  == pid_test.py ==
 
- 并发下唯一ID的生成规则 (python 多线程模拟并发 ，QPS以秒为单位， 不考虑 python GIL)
+ 分布式并发下唯一ID的生成规则 (python 多线程模拟并发 ，QPS以秒为单位， 不考虑 python GIL)
 
  1.使用 redis 的 incr （redis 为单线程, 原子性操作）
 	
