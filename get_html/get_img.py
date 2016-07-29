@@ -9,8 +9,9 @@ import re
 import os
 import time
 import threading
+# import urllib
 
-dir_ = os.getcwd()
+dir_ = os.getcwd() 
 
 def set_logs(msg,file=''):
     logStr = "[%s]%s\r\n" %(time.strftime("%Y-%m-%d %H:%M:%S"),msg)
@@ -27,6 +28,10 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo, headers={}):
     # http_pool = urllib3.HTTPConnectionPool('wanimal1983.tumblr.com') 
     http = urllib3.PoolManager()
 
+    # proxy_handler = urllib.request.ProxyHandler({'http':'52.79.97.212:64002'})  
+    # proxy_auth_handler = urllib.request.ProxyBasicAuthHandler()  
+    # proxy_auth_handler.add_password('rc4-md5', '123.123.2123.123', 'user', 'qd123456**') 
+
     for i in range(begin_page, end_page + 1):
 
         if threadNo<1:
@@ -39,10 +44,10 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo, headers={}):
         # m = urllib.request.urlopen(url+str(i)).read() 
         # m = http_pool.urlopen('GET',url+str(i) ,redirect=False)
         try:
-            r = http.request('GET', url+str(i), headers=headers)
+            r = http.request('GET', url+str(i))
         except:
             http = urllib3.PoolManager()
-            r = http.request('GET', url+str(i), headers=headers)
+            r = http.request('GET', url+str(i))
 
         m = r.data
         # print(m)
@@ -69,8 +74,8 @@ def get_img(url, begin_page, end_page, dir , threadNum , threadNo, headers={}):
                 findNum += 1
 
                 # 保存图片的命名规则 
-                # image_name  = image.split("/")[-1] # 有.jpg结尾的
-                image_name = image.replace("/",'-')  # 无
+                image_name  = image.split("/")[-1] # 有.jpg结尾的
+                # image_name = image.replace("/",'-')  # 无
 
                 
                 suffix = image_name.split(".")[-1] # 判断后最
@@ -112,7 +117,8 @@ if __name__ == "__main__":
     # 保存位置
     urls = {
             # 'url' : "http://wanimal1983.tumblr.com/page/",
-            # 'dir' : '/Volumes/LiukelinHD/Photos/WANIMAL2',
+            'url' : "http://wanimal1983.org/page/",
+            'dir' : '/Volumes/Liukelin/dowlod',
 
             # 'url' : "http://6taoke6.tumblr.com/page/",
             # 'dir' : '/Volumes/LiukelinHD/Photos/6taoke6',
@@ -152,17 +158,17 @@ if __name__ == "__main__":
             # 'url' : 'http://www.moko.cc/post/51279.html',
             # 'dir' : '/Volumes/Liukelin/photos/Arai-studio',
 
-            'url'   : 'https://fashionshootexperience.wordpress.com/2015/01/07/creepy-fairytale-with-broncolor/',
-            'dir'   : '/Volumes/Liukelin/photos/fashionshootexperience.wordpress.com'
+            # 'url'   : 'https://fashionshootexperience.wordpress.com/2015/01/07/creepy-fairytale-with-broncolor/',
+            # 'dir'   : '/Volumes/Liukelin/photos/fashionshootexperience.wordpress.com'
 
         }
 
     #statr page
     begin_page = 1
     # end page
-    end_page = 1
+    end_page = 500
     # 总线程数 
-    threadNum = 1
+    threadNum = 4
 
     headers = {
         # 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -188,7 +194,7 @@ if __name__ == "__main__":
 
     threads = []
     for i in range(0, threadNum):
-        t = threading.Thread( target=get_img, name='get_img', args=(urls['url'], begin_page, end_page, urls['dir'], threadNum, i ,headers ) )
+        t = threading.Thread( target=get_img, name='get_img', args=(urls['url'], begin_page, end_page, urls['dir'], threadNum, i  ) )
         threads.append(t)
     
     for t in threads:
