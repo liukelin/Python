@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 
 # 开启图片管道
 ITEM_PIPELINES = {'scrapy.contrib.pipeline.images.ImagesPipeline': 1}
-IMAGES_STORE = '/Volumes/Liukelin/photos/fashionshootexperience.wordpress.com'
+IMAGES_STORE = '/Volumes/Liukelin/dowlod'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

@@ -48,6 +48,48 @@ for x in range(0, (end - start).days):
 	print day
 
 
+'''
+	对生成的顺序数字 ， 分配比例
+'''
+def rangeForRank(total):
+	users = []
+	list_ = [0.6, 0.32, 0.07, 0.01]
+
+	dobleList = {0:0}
+	for i in range(0, len(list_)):
+		if i < 1:
+			dobleList[i+1] = round(total * list_[i])
+		else:
+			dobleList[i+1] = round(total * list_[i] + dobleList[i])
+
+	print dobleList
+
+	for i in range(0, total+1):
+		for j in range(1, len(dobleList)):
+			if i > dobleList[j-1] and i <= dobleList[j]:
+				users.append( { 'i':i, 'type': list_[j-1] } )
+	return users
+
+ss = rangeForRank(10)
+print "==="
+print len(ss),ss
+
+
+a = [1,2,3,4,5,6,7,8,9]
+b = [1,1,2,3]
+codesNew = list( set(a).difference( set(b) ) )
+print codesNew
+
+
+
+
+
+
+
+
+
+
+
 
 
 

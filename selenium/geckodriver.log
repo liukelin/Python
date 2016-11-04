@@ -1,0 +1,19 @@
+1478232264907	geckodriver	INFO	Listening on 127.0.0.1:52073
+1478232265908	mozprofile::profile	INFO	Using profile path /var/folders/9h/yml8mdzj4tbg1n2ywbg_cq6h0000gn/T/rust_mozprofile.HMTKZb3pg20O
+1478232265916	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1478232265920	geckodriver::marionette	INFO	Connecting to Marionette on localhost:52082
+[warn] kq_init: detected broken kqueue; not using.: Undefined error: 0
+1478232266484	Marionette	INFO	Listening on port 52082
+1478232267691	Marionette	INFO	startBrowser 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232267703	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232267871	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+JavaScript error: https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/plugins/every_cookie_mac_92a532a1.js, line 2: ReferenceError: c is not defined
+JavaScript warning: https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/global/js/all_async_search_d7c96710.js, line 98: unreachable code after return statement
+[warn] kq_init: detected broken kqueue; not using.: Undefined error: 0
+Vector smash protection is enabled.
+1478232269992	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232270009	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232271071	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232271079	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232273757	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db
+1478232273764	Marionette	INFO	sendAsync 7b5c4f6c-d44a-ef4c-b622-1263bb6371db

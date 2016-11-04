@@ -53,25 +53,11 @@ print(image_data)
 
 
 
+quest = input("What is your quest?\r\n")
 
-
-
-
-
-	check_ = db.mysql.get("SELECT * FROM `global_orders` where `uid`=%s  AND `note` LIKE  '%%%s%%'  ", uid, note)
-
-
-
-
-
-
-
-
-
-
-
-
-
+ss = ["a", "b", "c"]
+ss.insert(0,"1")
+print(ss)
 
 
 
