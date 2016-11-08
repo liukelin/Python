@@ -98,7 +98,7 @@ def open_apple():
 	
 	import base64   
 	imgdata=base64.b64decode(imgdata)  
-	file=open('%s.jpeg' %str(time.time()),'wb')  
+	file=open('code/%s.jpeg' %str(int(time.time()) ),'wb')  
 	file.write(imgdata)  
 	file.close() 
 	

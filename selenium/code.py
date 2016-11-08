@@ -11,9 +11,9 @@ import pytesseract # 验证码识别库 依赖PIL、tesseract-ocr 库 （sudo ap
 '''
 
 # http://www.pythonclub.org/project/captcha/python-pil
-image_name = "1.jpeg"
+image_name = "code/1.jpeg"
 
-def  test_1():
+def test_1():
     # 1.验证码图片二值化，去噪
     im = Image.open(image_name)
     im = im.filter(ImageFilter.MedianFilter())
@@ -21,7 +21,7 @@ def  test_1():
     im = enhancer.enhance(2)
     im = im.convert('1')
     im.show() # 预览图
-
+    return
 
     # 2.验证码图片字模提取
     s = 12          #start postion of first number
@@ -56,8 +56,33 @@ def  test_1():
             n+=1
         f.write("]\n")
 
-
+'''
 im = Image.open(image_name)
 vcode = pytesseract.image_to_string(im)
 print ("=%s=" % vcode)
+'''
+
+# 分割字符
+def fenge(img):
+    img = Image.open(img)
+    j = 1
+    for i in range(5): 
+        x = 14 + i*18    # 起始X坐标 这里的数字参数需要自己
+        y = 5           # 起始Y坐标 根据验证码图片的像素进行
+        x_size = x+20    # 宽度
+        y_size = y+60    # 长度
+        img.crop((x, y, x_size, y_size)).save("code/%d.gif" % j)   #适当的修改
+        j = j+1
+
+if __name__=='__main__':
+    fenge(image_name)
+
+
+
+
+
+
+
+
+
 

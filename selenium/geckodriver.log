@@ -308,3 +308,36 @@ Vector smash protection is enabled.
 1478490710207	Marionette	INFO	sendAsync fd7d4430-c3b7-8e47-8118-30b8337d9e03
 1478490775594	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
 1478490819532	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1478593315620	geckodriver	INFO	Listening on 127.0.0.1:53303
+1478593316606	mozprofile::profile	INFO	Using profile path /var/folders/9h/yml8mdzj4tbg1n2ywbg_cq6h0000gn/T/rust_mozprofile.CjaepmzNS9Gb
+1478593316606	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1478593316633	geckodriver::marionette	INFO	Connecting to Marionette on localhost:53312
+[warn] kq_init: detected broken kqueue; not using.: Undefined error: 0
+1478593317446	Marionette	INFO	Listening on port 53312
+1478593317881	geckodriver	INFO	Listening on 127.0.0.1:53331
+1478593317889	mozprofile::profile	INFO	Using profile path /var/folders/9h/yml8mdzj4tbg1n2ywbg_cq6h0000gn/T/rust_mozprofile.fMlkVG8frkgO
+1478593317890	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1478593317892	geckodriver::marionette	INFO	Connecting to Marionette on localhost:53338
+[warn] kq_init: detected broken kqueue; not using.: Undefined error: 0
+1478593318616	Marionette	INFO	Listening on port 53338
+1478593319053	Marionette	INFO	startBrowser bcba1e0b-f25f-e94c-aaf7-517d5fb57846
+1478593319082	Marionette	INFO	sendAsync bcba1e0b-f25f-e94c-aaf7-517d5fb57846
+1478593319303	Marionette	INFO	sendAsync bcba1e0b-f25f-e94c-aaf7-517d5fb57846
+1478593320218	Marionette	INFO	startBrowser 38cb1efa-28bc-8e45-b38a-e8111fbdd33c
+1478593320248	Marionette	INFO	sendAsync 38cb1efa-28bc-8e45-b38a-e8111fbdd33c
+1478593320414	Marionette	INFO	sendAsync 38cb1efa-28bc-8e45-b38a-e8111fbdd33c
+1478593347605	Marionette	INFO	sendAsync bcba1e0b-f25f-e94c-aaf7-517d5fb57846
+1478593347615	Marionette	INFO	sendAsync bcba1e0b-f25f-e94c-aaf7-517d5fb57846
+1478593347625	Marionette	INFO	sendAsync 38cb1efa-28bc-8e45-b38a-e8111fbdd33c
+1478593347633	Marionette	INFO	sendAsync 38cb1efa-28bc-8e45-b38a-e8111fbdd33c
+1478595662345	geckodriver	INFO	Listening on 127.0.0.1:53865
+1478595663346	mozprofile::profile	INFO	Using profile path /var/folders/9h/yml8mdzj4tbg1n2ywbg_cq6h0000gn/T/rust_mozprofile.3nnwi3Y5GqrO
+1478595663347	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1478595663349	geckodriver::marionette	INFO	Connecting to Marionette on localhost:53874
+[warn] kq_init: detected broken kqueue; not using.: Undefined error: 0
+1478595664103	Marionette	INFO	Listening on port 53874
+1478595665577	Marionette	INFO	startBrowser d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
+1478595665614	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
+1478595665874	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
+1478595681067	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
+1478595681074	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
