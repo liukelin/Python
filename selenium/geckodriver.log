@@ -341,3 +341,6 @@ Vector smash protection is enabled.
 1478595665874	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
 1478595681067	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
 1478595681074	Marionette	INFO	sendAsync d5aa5305-a4b5-cd47-b6fb-a71a7b73118a
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x440003,name=PCompositorBridge::Msg_DidComposite) Channel closing: too late to send/recv, messages will be lost
+

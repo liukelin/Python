@@ -56,11 +56,11 @@ def test_1():
             n+=1
         f.write("]\n")
 
-'''
-im = Image.open(image_name)
-vcode = pytesseract.image_to_string(im)
-print ("=%s=" % vcode)
-'''
+def check_code(image_name):
+    im = Image.open(image_name)
+    vcode = pytesseract.image_to_string(im)
+    print ("=%s=" % vcode)
+
 
 # 分割字符
 def fenge(img):
@@ -75,7 +75,8 @@ def fenge(img):
         j = j+1
 
 if __name__=='__main__':
-    fenge(image_name)
+    # fenge(image_name)
+    check_code('/Users/liukelin/Downloads/genimage.png')
 
 
 
