@@ -38,5 +38,18 @@
  == /demo/get_all_image.py ==
  多线程 获取本计算机下所有图片并保存
 
+==== selenium 的使用 ====
+
+1.百度贴吧自动登录、签到
+
+运行脚本: tieba.py
+
+环境: python3
+
+依赖库: pip install selenium , requests
+
+使用的接口为无验证码接口，有验证码的话请自行实现。
+
+登录过程使用selenium webdriver操作并获取登录cookie，签到过程为请求签到接口
 
 @author:  liukelin 31456690@qq.com
