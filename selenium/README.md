@@ -1,8 +1,15 @@
-# selenium的一些运用
+# selenium 的一些运用
 
 ==== 百度贴吧自动登录、签到 ====
-tieba.py 
+
+环境: python3
+
+依赖库: pip install selenium , requests
+
+运行脚本: tieba.py 
+
 使用的接口为无验证码接口，有验证码的话请自行实现。
+
 登录过程使用selenium webdriver操作并获取登录cookie，签到过程为请求签到接口
 
 
