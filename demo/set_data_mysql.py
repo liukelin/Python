@@ -69,7 +69,7 @@ def get_txt(dir_):
 	        line=line.strip()
 	        if line:
 	        	d = line.split('----')
-	        	if isinstance(d , (list))
+	        	if isinstance(d , (list)):
 		        	data.append(d)
 		        	if i>0 and i%num==0:
 		        		set_data(data)
