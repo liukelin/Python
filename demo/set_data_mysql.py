@@ -55,7 +55,7 @@ def get_txt_list(path, thread):
                                         
                     print "线程:%s ,copy:%s" %(thread,temp_dir)
     except:
-        print 'Have no legal power'
+        print 'Have no legal power' 
     return True
 
 def get_txt(dir_):
