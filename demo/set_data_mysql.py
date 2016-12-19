@@ -25,9 +25,9 @@ import common
 config = {
 	'mysql':{
 		'host': '127.0.0.1',
-	    'database': 'mail', 
-	    'user': 'db',
-	    'password': '123', 
+	    'database': 'netease_mail', 
+	    'user': 'root',
+	    'password': '123456', 
 	}
 }
 path_ = ''
@@ -61,7 +61,7 @@ def get_txt_list(path, thread):
 def get_txt(dir_):
 	num = 5000 # 5000入库一次
 	i = 0
-
+	data = []
 	f = open(dir_, "r")  
 	while True:  
 	    line = f.readline()  
@@ -69,9 +69,12 @@ def get_txt(dir_):
 	        line=line.strip()
 	        if line:
 	        	d = line.split('----')
-	        	if i>0 and i%num==0:
-	        		set_data(d)
-	        	i++
+	        	if isinstance(d , (list))
+		        	data.append(d)
+		        	if i>0 and i%num==0:
+		        		set_data(data)
+		        		data = []
+		        	i=i+1
 	    else:  
 	        break
 	f.close()
@@ -85,7 +88,8 @@ def set_data(body=[]):
 		if i[0] and i[1]:
 			msg = "(%s,'%s')" %(i[0],i[1])
 			d.append(msg)
-	sql = " install iinto netease_mail (`mail`,`password`) values %s " % ','.join(d)
+	data = ','.join(d)
+	sql = " install iinto netease_mail (`user`,`pass`) values %s " % data
 	return db.mysql.execute(sql)
 
 

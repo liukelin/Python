@@ -3,7 +3,7 @@
 
 import sys
 from PIL import Image,ImageEnhance,ImageFilter # Pillow
-import pytesseract # 验证码识别库 依赖PIL、tesseract-ocr 库 （sudo apt-get install tesseract-ocr）
+import pytesseract # 验证码识别库 依赖PIL、tesseract-ocr 库 （sudo apt-get install tesseract-ocr）(http://www.cnblogs.com/liuqing0328/p/5914074.html)
 
 '''
  安装 pytesseract环境
@@ -76,7 +76,7 @@ def fenge(img):
 
 if __name__=='__main__':
     # fenge(image_name)
-    check_code('/Users/liukelin/Downloads/genimage.png')
+    check_code('code/genimage.png')
 
 
 

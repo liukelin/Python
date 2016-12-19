@@ -66,12 +66,12 @@ def Work_Queues():
 
 	channel.basic_qos(prefetch_count=1) # 允许暂留Unacked 数量，（数据未basic_ack前 数据保存在Unacked允许的最大值）
 
-	channel.basic_consume(callback, 
+	channel.basic_consume(callback,  # 使用回调方法方式（）
 						queue=queue_name,
 						#no_ack=True,      #失效basic_ack：意思消费读取数据的时候，True为不要ack,由程序后面手工ack (basic_ack未执行，不会阻塞消费)，如果为设置，消费数据如果未basic_ack 操作，就会阻塞等待消费成功
 						)
 
-	channel.start_consuming()
+	channel.start_consuming() # 持续监听
 
 	# `rabbitmq`实现了消息均分的功能，通过设置`basic.qos`方法的`prefetch_count`来实现。它会告诉`rabbitmq`的生产者不要给一个消费者分配过多的任务，也就是说不要在消费者处理完成已经接收到的任务之前分配新的任务。
 

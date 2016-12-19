@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# @author: liukelin  314566990@qq.com
 import os
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -53,8 +54,7 @@ import time
 
 def demo():
 	
-	# browser = webdriver.Chrome(executable_path = 'driver/mozilla/mac-geckodriver')
-
+	browser = webdriver.Chrome(executable_path = 'driver/chrome/chromedriver-mac32')
 	browser = webdriver.Firefox(executable_path = 'driver/mozilla/mac-geckodriver')
 
 	
