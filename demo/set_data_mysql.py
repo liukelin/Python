@@ -17,10 +17,10 @@ import db
 import redis
 import random
 # import utils
-import urllib3
+# import urllib3
 import json 
 from datetime import date, datetime, timedelta
-import common
+# import common
 
 config = {
 	'mysql':{
