@@ -101,6 +101,7 @@ def get_txt(dir_):
 
 # 批量入库
 def set_data(body=[]):
+	'''
 	d = []
 	for i in body:
 		if i[0] and i[1]:
@@ -109,7 +110,14 @@ def set_data(body=[]):
 	data = ','.join(d)
 	sql = " install into netease_mail (`user`,`pass`) values %s " % data
 	return db.mysql.execute(sql)
-
+	'''
+	for i in body:
+		if i[0] and i[1]:
+			try:
+				db.mysql.execute(" install into netease_mail (`user`,`pass`,`type`) values (%s, %s, %s) ", i[0], i[1] num)
+			except:
+				pass
+	return len(body)
 
 if __name__=='__main__':
 	get_txt_list(path_, 1)
