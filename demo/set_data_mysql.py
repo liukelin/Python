@@ -30,7 +30,25 @@ config = {
 	    'password': '123456', 
 	}
 }
-path_ = ''
+
+dir_ = ''
+path_s = [
+			'',
+			'',
+			'',
+		]
+num = int(sys.argv[1])
+if path_s[num]:
+	path_ = dir_ + path_s[num]
+else:
+	exit('error no file !')
+
+
+st = os.popen('ps -ef | grep "'+__file__+' '+ str(num) +'" | grep -v "grep" | wc -l' ).read().strip('\n').strip()
+if int(st)>2: # 允许进程数
+    exit('process Max %s No.:%s' %(__file__, st))
+    # exit()
+
 
 # 数据库连接实例
 db.mysql = torndb.Connection(**config['mysql'])
@@ -51,9 +69,9 @@ def get_txt_list(path, thread):
                     # shutil.copyfile(temp_dir,os.path.join(file_src,thread,i))
                     
                     # 读取文件
-                    get_txt(i)
+                    get_txt(temp_dir)
                                         
-                    print "线程:%s ,copy:%s" %(thread,temp_dir)
+                    print "处理:%s" %(temp_dir)
     except:
         print 'Have no legal power' 
     return True
@@ -89,7 +107,7 @@ def set_data(body=[]):
 			msg = "(%s,'%s')" %(i[0],i[1])
 			d.append(msg)
 	data = ','.join(d)
-	sql = " install iinto netease_mail (`user`,`pass`) values %s " % data
+	sql = " install into netease_mail (`user`,`pass`) values %s " % data
 	return db.mysql.execute(sql)
 
 
