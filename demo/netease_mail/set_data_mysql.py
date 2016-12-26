@@ -5,7 +5,7 @@
 # @author: liukelin
 #
 '''
-test
+test 邮箱入库
 '''
 
 import os
@@ -108,7 +108,7 @@ def set_data(body=[]):
 			msg = "(%s,'%s')" %(i[0],i[1])
 			d.append(msg)
 	data = ','.join(d)
-	sql = " install into netease_mail (`user`,`pass`) values %s " % data
+	sql = " insert into netease_mail (`user`,`pass`) values %s " % data
 	return db.mysql.execute(sql)
 	'''
 	for i in body:
