@@ -12,27 +12,36 @@ import os
 import sys
 import time
 # import yaml
-# import torndb
-# import db
+import torndb
+import db
 import redis
 import random
 # import utils
 # import urllib3
 import json 
 from datetime import date, datetime, timedelta
-import pymysql
+# import pymysql
 
 
 
+# config = {
+# 	'mysql':{
+# 		'host': '192.168.1.86',
+# 		'port':3306,
+# 	    'db': 'netease_mail', 
+# 	    'user': 'canal',
+# 	    'password': 'canal', 
+# 	}
+# }
 config = {
 	'mysql':{
-		'host': '192.168.1.86',
-		'port':3306,
-	    'db': 'netease_mail', 
-	    'user': 'canal',
-	    'password': 'canal', 
+		'host': '127.0.0.1',
+	    'database': 'netease_mail', 
+	    'user': 'root',
+	    'password': '123456', 
 	}
 }
+
 
 # conn = pymysql.connect(**config['mysql'])
 # cur = conn.cursor()
@@ -41,6 +50,9 @@ config = {
 #            print(r)
 #            #cur.close()
 # conn.close()
+
+# 数据库连接实例
+db.mysql = torndb.Connection(**config['mysql'])
 
 
 def get_txt(dir_):
@@ -82,13 +94,13 @@ def set_data(body=[]):
 	# exit
 	# 
 	'''
-	conn = pymysql.connect(**config['mysql'])
-	cur = conn.cursor()
+	# conn = pymysql.connect(**config['mysql'])
+	# cur = conn.cursor()
 	for i in body:
 		if i[0] and i[1]:
 			sql = " insert into `duobao_user` (`mail`,`type_`) values ('%s','%s') " % (i[0],i[1])
-			cur.execute(sql)
-	conn.close()
+			db.mysql.execute(sql)
+	# conn.close()
 
 	return len(body)
 
