@@ -39,7 +39,7 @@ db.mysql = torndb.Connection(**config['mysql'])
 
 
 def logs(data):
-	f = open('logs/log%s.log' % str(time.time()), 'w+')
+	f = open('logs/log%s.log' % str(time.time()), 'a+')
 	f.write(data)
 	f.close()
 
@@ -136,36 +136,64 @@ def get_txt(dir_):
 	        break
 	f.close()
 
+'''
 # 写入redis  list 结构
+ 类型1：130123420000@163.com   [:3]为key    手机邮箱
+ 类型2：0130***@163.com		  [:-3]为key   普通邮箱
+'''
 def set_redis(data):
 	for i in data:
 		try:
 			d = i.split('@')
-			k = d[0][:-3]
-			# print k, i
-			# redisConn.sadd(k, i)
-			upredis('sadd', k, i)
+			d[0] = d[0].replace(' ', '')
+			if len(i) == 11 and i.isdigit(): # 类型1 
+				k1 = d[0][:3]
+				upredis('sadd', k1, i)
+			else:
+				k = d[0][:-3]
+				# print k, i
+				# redisConn.sadd(k, i)
+				upredis('sadd', k, i)
 		except:
 			pass
 	return len(data)
 
+'''
 # 读取数据库数据，并匹配
+ 类型1：130****0000@163.com   [:3]为key    手机邮箱
+ 类型2：0130***@163.com		 [:-3]为key   普通邮箱
+'''
 def get_duobao():
-	olist = db.mysql.query(" select * from `duobao_user` where `type_` ")
+	olist = db.mysql.query(" select * from `duobao_user` ")
 	for i in olist:
+		type_ = 0 # 邮箱类型
 		try:
 			d = i['mail'].split('@')
-			k = d[0][:-3]
+			d[0] = d[0].replace(' ', '')
+			if len(i) == 11 and d[0][-1:]!='*': # 类型1
+				k = d[0][:3]
+				type_ = 1
+			else: 								# 类型2
+				k = d[0][:-3]
 		except:
 			continue
 
 		try:
+
 			# olist = redisConn.smembers(k)
 			blist = upredis('smembers', k, 0)
 			if olist:
 				for b in blist:
 					try:
-						if b and i['type_'] in b:
+						check_ = False
+						if type_==1:
+							if b and (d[0][-4:] in b) and (i['type_'] in b):
+								check_ = True
+						else:
+							if b and i['type_'] in b:
+								check_ = True
+
+						if check_:
 							db.mysql.execute(" insert into `duobao_user_join` (`uid`, `msg`) values(%s, %s) ", i['id'], b)
 					except:
 						pass
@@ -186,7 +214,7 @@ def find_mails():
 	for i in mails:
 		
 		try:
-			f = open('logs/'+i+'.log', 'w+')
+			f = open('logs/'+i+'.log', 'a+')
 			d = i.split('@')
 			k = d[0][:-3]
 			# olist = redisConn.smembers(k)
