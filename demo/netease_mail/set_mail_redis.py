@@ -110,7 +110,7 @@ def get_txt_list(path):
         	# 清除redis
         	upredis('flushdb',0,0)
 	        
-
+    upredis('flushdb',0,0)
     logs("完成.\r\n")
     return True
 
