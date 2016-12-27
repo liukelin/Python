@@ -16,8 +16,8 @@ import redis
 file_check = ["txt"]#文件限制
 config = {
 	'redis':{
-		'host': '127.0.0.1',
-	    'port': 3306,
+		'host': '192.168.1.86',
+	    'port': 6379,
 	    'db':0 
 	}
 }
@@ -27,13 +27,13 @@ pool = redis.ConnectionPool(**config['redis'])
 redisConn = redis.Redis(connection_pool=pool)
 
 # 读取所有文件
-def get_txt_list(path, thread):
+def get_txt_list(path):
     try:
         #print "开始：%s" %(path)
         for i in os.listdir(path):
             temp_dir = os.path.join(path,i)
             if os.path.isdir(temp_dir):
-                get_txt_list(temp_dir,thread);
+                get_txt_list(temp_dir);
             else:
                 if i.split('.')[-1].lower() in file_check:
                     # dirs[thread].append(temp_dir)
@@ -75,7 +75,8 @@ def set_redis(data):
 		try:
 			d = i.split('@')
 			k = d[0][:-3]
-			redisConn.rpush(k, i)
+			print k, i
+			redisConn.sadd(k, i)
 		except:
 			pass
 	return len(data)
@@ -83,7 +84,7 @@ def set_redis(data):
 
 
 if __name__=='__main__':
-	get_txt_list('')
+	get_txt_list('/Volumes/LiukelinHD/网易裤子/52G葫芦娃/163com')
 
 
 
