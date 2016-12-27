@@ -151,7 +151,7 @@ def set_redis(data):
 
 # 读取数据库数据，并匹配
 def get_duobao():
-	olist = db.mysql.query(" select * from `duobao_user` where `type_` in ('163.com', '126.com') ")
+	olist = db.mysql.query(" select * from `duobao_user` where `type_` ")
 	for i in olist:
 		try:
 			d = i['mail'].split('@')
@@ -161,9 +161,14 @@ def get_duobao():
 
 		try:
 			# olist = redisConn.smembers(k)
-			olist = upredis('smembers', k, 0)
+			blist = upredis('smembers', k, 0)
 			if olist:
-				for i in olist
+				for b in blist:
+					try:
+						if b and i['type_'] in b:
+							db.mysql.execute(" insert into `duobao_user_join` (`uid`, `msg`) values(%s, %s) ", i['id'], b)
+					except:
+						pass
 		except:
 			continue
 	return True
