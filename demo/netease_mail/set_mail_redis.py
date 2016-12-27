@@ -138,7 +138,7 @@ def get_txt(dir_):
 
 '''
 # 写入redis  list 结构
- 类型1：130123420000@163.com   [:3]为key    手机邮箱
+ 类型1：130123420000@163.com   [:3]+[-4:]为key    手机邮箱
  类型2：0130***@163.com		  [:-3]为key   普通邮箱
 '''
 def set_redis(data):
@@ -146,8 +146,8 @@ def set_redis(data):
 		try:
 			d = i.split('@')
 			d[0] = d[0].replace(' ', '')
-			if len(i) == 11 and i.isdigit(): # 类型1 
-				k1 = d[0][:3]
+			if len(d[0]) == 11 and d[0].isdigit(): # 类型1 
+				k1 = d[0][:3]+d[0][-4:]
 				upredis('sadd', k1, i)
 			else:
 				k = d[0][:-3]
@@ -160,7 +160,7 @@ def set_redis(data):
 
 '''
 # 读取数据库数据，并匹配
- 类型1：130****0000@163.com   [:3]为key    手机邮箱
+ 类型1：130****0000@163.com   [:3]+[-4:]为key    手机邮箱
  类型2：0130***@163.com		 [:-3]为key   普通邮箱
 '''
 def get_duobao():
@@ -170,8 +170,8 @@ def get_duobao():
 		try:
 			d = i['mail'].split('@')
 			d[0] = d[0].replace(' ', '')
-			if len(i) == 11 and d[0][-1:]!='*': # 类型1
-				k = d[0][:3]
+			if len(d[0]) == 11 and d[0][-1:]!='*': # 类型1
+				k = d[0][:3]+d[0][-4:]
 				type_ = 1
 			else: 								# 类型2
 				k = d[0][:-3]
@@ -187,7 +187,7 @@ def get_duobao():
 					try:
 						check_ = False
 						if type_==1:
-							if b and (d[0][-4:] in b) and (i['type_'] in b):
+							if b and (i['type_'] in b):
 								check_ = True
 						else:
 							if b and i['type_'] in b:
