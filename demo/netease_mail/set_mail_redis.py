@@ -6,6 +6,11 @@
 #
 '''
 将文件 邮箱导 入redis，并匹配
+网上抓到一批  带*邮箱，需要进行碰撞匹配
+
+类型1：130****0000@163.com   [:3]+[-4:]为key    手机邮箱
+类型2：xxxx***@163.com		 [:-3]为key   普通邮箱
+
 '''
 
 import os
@@ -14,6 +19,7 @@ import time
 import redis
 import torndb
 import db
+from datetime import date, datetime, timedelta
 
 file_check = ["txt"]#文件限制
 config = {
@@ -39,7 +45,7 @@ db.mysql = torndb.Connection(**config['mysql'])
 
 
 def logs(data):
-	f = open('logs/log%s.log' % str(time.time()), 'a+')
+	f = open('logs/log%s.log' % str(date.today()), 'a+')
 	f.write(data)
 	f.close()
 

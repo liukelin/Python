@@ -15,3 +15,12 @@ a1 = a.split('@')
 b1 = b.split('@')
 
 print a1[0][-4:],b1[0][:-3]
+
+ass = {}
+ass = {
+	'asa':1,
+}
+if len(ass)==0:
+	print 111
+
+print 6875974916%12
