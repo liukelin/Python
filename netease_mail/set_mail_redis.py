@@ -211,9 +211,6 @@ def get_duobao():
 def find_mails():
 	mails = [
 			'gohacking@163.com',
-			'sekift@163.com',
-			'bingochen87@163.com',
-			'bananamylove@163.com',
 			'liukelin_1@163.com',
 			'13763385134@163.com',
 		]
