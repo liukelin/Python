@@ -25,7 +25,7 @@ from datetime import date, datetime, timedelta
 config = {
 	'mysql':{
 		'host': '127.0.0.1',
-	    'database': 'netease_mail', 
+	    'database': 'netease_mail_all', 
 	    'user': 'root',
 	    'password': '123456', 
 	}
@@ -33,9 +33,17 @@ config = {
 
 dir_ = ''
 path_s = [
-			'',
-			'',
-			'',
+			'126',
+			'163com',
+			'1632',
+			'163mail1',
+			'163mail2',
+			'163mail3',
+			'163mail4',
+			'163mail5',
+			'163mail6',
+			'163mail7',
+			'163mail8',
 		]
 num = int(sys.argv[1])
 if path_s[num]:
@@ -56,13 +64,13 @@ db.mysql = torndb.Connection(**config['mysql'])
 file_check = ["txt"]#文件限制
 
 # 读取所有文件
-def get_txt_list(path, thread):
+def get_txt_list(path):
     try:
         #print "开始：%s" %(path)
         for i in os.listdir(path):
             temp_dir = os.path.join(path,i)
             if os.path.isdir(temp_dir):
-                get_txt_list(temp_dir,thread);
+                get_txt_list(temp_dir);
             else:
                 if i.split('.')[-1].lower() in file_check:
                     # dirs[thread].append(temp_dir)
@@ -76,23 +84,41 @@ def get_txt_list(path, thread):
         print 'Have no legal power' 
     return True
 
-def get_txt(dir_):
+def get_txt(temp_dir):
+	try:
+		isDIR = temp_dir.replace(dir_, '')
+	except:
+		pass
+
 	num = 5000 # 5000入库一次
 	i = 0
 	data = []
-	f = open(dir_, "r")  
+	f = open(temp_dir, "r")
 	while True:  
 	    line = f.readline()  
 	    if line:
-	        line=line.strip()
-	        if line:
-	        	d = line.split('----')
-	        	if isinstance(d , (list)):
-		        	data.append(d)
-		        	if i>0 and i%num==0:
-		        		set_data(data)
-		        		data = []
-		        	i=i+1
+	    	try:
+		        line=line.strip()
+		        if line:
+
+		        	# 普通格式
+		        	d = line.split('----')
+		        	if isinstance(d , (list)) and len(d)>1:
+		        		d.append(isDIR)
+			        	data.append(d)
+			        else: # 
+			        	for t in ['.com','.cn']
+			        		dk = line.split(t)
+			        		if isinstance(dk , (list)) and len(dk)>1:
+			        			data.append([dk[0]+t, dk[1]],isDIR)
+
+			        if i>0 and i%num==0:
+			        	set_data(data)
+			        	data = []
+			      
+			        i=i+1
+			except:
+				pass
 	    else:  
 	        break
 	f.close()
@@ -112,15 +138,17 @@ def set_data(body=[]):
 	return db.mysql.execute(sql)
 	'''
 	for i in body:
-		if i[0] and i[1]:
+		if len(i)>2:
+			i[0] = i[0].replace(' ', '')
+			i[1] = i[1].replace(' ', '')
 			try:
-				db.mysql.execute(" install into netease_mail (`user`,`pass`,`type`) values (%s, %s, %s) ", i[0], i[1] num)
+				db.mysql.execute(" install into `netease_mail_%s` (`mail`,`pass`,`note`) values (%s, %s, %s) ", int(num), i[0], i[1], i[2])
 			except:
 				pass
 	return len(body)
 
 if __name__=='__main__':
-	get_txt_list(path_, 1)
+	get_txt_list(path_)
 
 
 

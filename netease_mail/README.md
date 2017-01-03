@@ -10,4 +10,11 @@
 	服务器内存才16G，所以分批 导入-匹配-flushdb。
 	关闭redis rdb、aof 提高性能
 
-	
+
+13240051 line
+
+delete from duobao_user_join  where id in (select id from (select  max(id) as id,count(id) as count_ from duobao_user_join group by msg having count_ >1 order by count_ desc) as tab )
+
+SELECT * FROM information_schema.INNODB_TRX\G;
+
+trx_mysql_thread_id
