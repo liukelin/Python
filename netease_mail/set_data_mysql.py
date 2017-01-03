@@ -121,16 +121,14 @@ def get_txt(temp_dir):
 		        	if isinstance(d , (list)) and len(d)>1:
 		        		d.append(isDIR)
 			        	data.append(d)
-			        else: # 
-			        	for t in ['.com','.cn']
+			        else:
+			        	for t in ['.com','.cn']:
 			        		dk = line.split(t)
 			        		if isinstance(dk , (list)) and len(dk)>1:
 			        			data.append([dk[0]+t, dk[1]],isDIR)
-
 			        if i>0 and i%num==0:
 			        	set_data(data)
 			        	data = []
-			      
 			        i=i+1
 			except:
 				pass
