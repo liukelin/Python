@@ -28,6 +28,11 @@ config = {
 	    'database': 'netease_mail_all', 
 	    'user': 'root',
 	    'password': '123456', 
+	},
+	'redis':{
+		'host': '127.0.0.1',
+	    'port': 6379,
+	    'db':0 
 	}
 }
 
@@ -61,12 +66,15 @@ if int(st)>2: # 允许进程数
 # 数据库连接实例
 db.mysql = torndb.Connection(**config['mysql'])
 
+pool = redis.ConnectionPool(**config['redis'])
+redisConn = redis.Redis(connection_pool=pool)
+
 file_check = ["txt"]#文件限制
 
 # 读取所有文件
 def get_txt_list(path):
     try:
-        #print "开始：%s" %(path)
+        print "开始：%s" %(path)
         for i in os.listdir(path):
             temp_dir = os.path.join(path,i)
             if os.path.isdir(temp_dir):
@@ -76,10 +84,17 @@ def get_txt_list(path):
                     # dirs[thread].append(temp_dir)
                     # shutil.copyfile(temp_dir,os.path.join(file_src,thread,i))
                     
-                    # 读取文件
-                    get_txt(temp_dir)
-                                        
                     print "处理:%s" %(temp_dir)
+                    #check out file
+                    check = redisConn.get(temp_dir)
+                    if not check:
+                    	# 读取文件
+	                    get_txt(temp_dir)
+
+	                    redisConn.set(temp_dir, 1)
+                                        
+                    else:
+                    	print "已处理。"
     except:
         print 'Have no legal power' 
     return True
@@ -142,7 +157,7 @@ def set_data(body=[]):
 			i[0] = i[0].replace(' ', '')
 			i[1] = i[1].replace(' ', '')
 			try:
-				db.mysql.execute(" install into `netease_mail_%s` (`mail`,`pass`,`note`) values (%s, %s, %s) ", int(num), i[0], i[1], i[2])
+				db.mysql.execute(" insert into `netease_mail_%s` (`mail`,`pass`,`note`) values (%s, %s, %s) ", int(num), i[0], i[1], i[2])
 			except:
 				pass
 	return len(body)
