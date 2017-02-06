@@ -53,11 +53,24 @@ print(image_data)
 
 
 
-quest = input("What is your quest?\r\n")
+# quest = input("What is your quest?\r\n")
 
 ss = ["a", "b", "c"]
 ss.insert(0,"1")
 print(ss)
+
+
+def up_code():
+	# windows-1252 转 utf-8
+	f = open('/Users/liukelin/Documents/书籍/text.txt')
+	stt = f.read() #.decode('windows-1252')
+	f.close()
+	print(stt)
+	stt.decode('windows-1252').encode('utf-8')
+
+	f = open('/Users/liukelin/Documents/书籍/text2.txt')
+	f.write(str2)
+up_code()
 
 
 

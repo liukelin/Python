@@ -52,7 +52,7 @@ config = {
 # conn.close()
 
 # 数据库连接实例
-db.mysql = torndb.Connection(**config['mysql'])
+myConn = torndb.Connection(**config['mysql'])
 
 
 def get_txt(dir_):
@@ -99,7 +99,7 @@ def set_data(body=[]):
 	for i in body:
 		if i[0] and i[1]:
 			sql = " insert into `duobao_user` (`mail`,`type_`) values ('%s','%s') " % (i[0],i[1])
-			db.mysql.execute(sql)
+			myConn.execute(sql)
 	# conn.close()
 
 	return len(body)

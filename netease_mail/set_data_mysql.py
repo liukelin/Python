@@ -13,7 +13,7 @@ import sys
 import time
 # import yaml
 import torndb
-import db
+# import db
 import redis
 import random
 # import utils
@@ -64,7 +64,7 @@ if int(st)>2: # 允许进程数
 
 
 # 数据库连接实例
-db.mysql = torndb.Connection(**config['mysql'])
+myConn = torndb.Connection(**config['mysql'])
 
 pool = redis.ConnectionPool(**config['redis'])
 redisConn = redis.Redis(connection_pool=pool)
@@ -115,7 +115,6 @@ def get_txt(temp_dir):
 	    	try:
 		        line=line.strip()
 		        if line:
-
 		        	# 普通格式
 		        	d = line.split('----')
 		        	if isinstance(d , (list)) and len(d)>1:
@@ -148,14 +147,14 @@ def set_data(body=[]):
 			d.append(msg)
 	data = ','.join(d)
 	sql = " insert into netease_mail (`user`,`pass`) values %s " % data
-	return db.mysql.execute(sql)
+	return myConn.execute(sql)
 	'''
 	for i in body:
 		if len(i)>2:
 			i[0] = i[0].replace(' ', '')
 			i[1] = i[1].replace(' ', '')
 			try:
-				db.mysql.execute(" insert into `netease_mail_%s` (`mail`,`pass`,`note`) values (%s, %s, %s) ", int(num), i[0], i[1], i[2])
+				myConn.execute(" insert into `netease_mail_%s` (`mail`,`pass`,`note`) values (%s, %s, %s) ", int(num), i[0], i[1], i[2])
 			except:
 				pass
 	return len(body)

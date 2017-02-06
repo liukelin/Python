@@ -41,7 +41,7 @@ config = {
 pool = redis.ConnectionPool(**config['redis'])
 redisConn = redis.Redis(connection_pool=pool)
 
-db.mysql = torndb.Connection(**config['mysql'])
+myConn = torndb.Connection(**config['mysql'])
 
 
 def logs(data):
@@ -170,7 +170,7 @@ def set_redis(data):
  类型2：0130***@163.com		 [:-3]为key   普通邮箱
 '''
 def get_duobao():
-	olist = db.mysql.query(" select * from `duobao_user` ")
+	olist = myConn.query(" select * from `duobao_user` ")
 	for i in olist:
 		type_ = 0 # 邮箱类型
 		try:
@@ -200,7 +200,7 @@ def get_duobao():
 								check_ = True
 
 						if check_:
-							db.mysql.execute(" insert into `duobao_user_join` (`uid`, `msg`) values(%s, %s) ", i['id'], b)
+							myConn.execute(" insert into `duobao_user_join` (`uid`, `msg`) values(%s, %s) ", i['id'], b)
 					except:
 						pass
 		except:

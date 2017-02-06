@@ -43,7 +43,7 @@ except yaml.YAMLError as e:
     print "Error in configuration file: %s" % e
 
 # 数据库连接实例
-db.mysql = torndb.Connection(**config['mysql'])
+myConn = torndb.Connection(**config['mysql'])
 
 #保存路径
 dir_file = "%s/static" % sys.path[0]
@@ -242,7 +242,7 @@ def set_goods(data):
     createtime = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
     data['goods_update_time'] = data['goods_update_time'] if data.has_key('goods_update_time') else createtime
     data['goods_create_time'] = data['goods_create_time'] if data.has_key('goods_create_time') else createtime
-    new_id = db.mysql.execute("INSERT INTO  `product` ("
+    new_id = myConn.execute("INSERT INTO  `product` ("
             "`goods_code`, `goods_title` ,`goods_name` ,`goods_image` ,`goods_detail` ,`goods_price` ,"
             "`goods_market_price` , `goods_cost_price` ,`goods_update_time` ,`goods_create_time`,`goods_html`,`goods_url`)"
             "VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",

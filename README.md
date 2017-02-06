@@ -51,6 +51,21 @@
 
 	使用的接口为无验证码接口，有验证码的话请自行实现。
 
-登录过程使用selenium webdriver操作并获取登录cookie，签到过程为请求签到接口
+	登录过程使用selenium webdriver操作并获取登录cookie，签到过程为请求签到接口
+
+
+=== netease_mail 网易裤子的碰撞 ===
+
+	将52G网易裤子，导入redis，进行查找
+
+	set_mail_redis.py
+	网上抓到一批带*邮箱（130****0000@163.com、xxxx***@163.com），需要进行碰撞匹配
+
+	将52G邮箱导入redis，并匹配
+	类型1手机邮箱：130****0000@163.com    [:3]+[-4:]为key    
+	类型2普通邮箱：xxxx***@163.com		[:-3]为key  
+
+	服务器内存才16G，所以分批 导入-匹配-flushdb。
+	关闭redis rdb、aof 提高性能
 
 @author:  liukelin 31456690@qq.com
