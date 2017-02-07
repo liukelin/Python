@@ -127,7 +127,9 @@ oneTime = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime( time.time() ))
 if str(oneTime) > '2017-01-26 00:00:00':
     print str(oneTime)
     
-
+i = 'aaaa====23123'
+st = i.split('====')
+print st
 
 
 
