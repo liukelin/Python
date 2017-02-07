@@ -39,15 +39,15 @@ def group_mail():
     limit = 5000000
     key = 'zset_group_mail'
     while True:
-        page += 1
-        page = (page-1) * limit
-        olist = myConn.query(" select * from `duobao_user_join` limit %s,%s ", page, limit)
+        page_ = page * limit
+        olist = myConn.query(" select * from `duobao_user_join` limit %s,%s ", page_, limit)
         if not olist:
             break
         # zset = []
         for i in olist:
             val = "%s====%s" %(i['uid'], i['msg'])
             redisConn.sadd(key, val)
+        page += 1
         print "page:%s. ok." % str(page)
 
     return True
