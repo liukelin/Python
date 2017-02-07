@@ -26,4 +26,4 @@ def web_capture(url, save="capture.png"):
  
  
 if __name__ == "__main__":
-    web_capture("http://www.redis.net.cn/tutorial/3511.html", 'capture1.png')
+    web_capture("http://www.baidu.com")
