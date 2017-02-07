@@ -67,7 +67,7 @@ def set_db(key):
         if len(olist)==10000:
             sql = " insert into `duobao_user_join_group` (`uid`,`msg`) values "
             sql = sql + ','.join(olist)
-            redisConn.execute( sql )
+            myConn.execute( sql )
             olist = []
         # except:
         #     print i + ' error.'
