@@ -62,15 +62,20 @@ def set_db(key):
     for i in zsetlist:
         # try:
         st = i.split('====')
-        olist.append("('%s','%s')" %(st[1], st[2]) )
+        # olist.append("('%s','%s')" %(st[0], st[1]) )
 
-        if len(olist)==10000:
-            sql = " insert into `duobao_user_join_group` (`uid`,`msg`) values "
-            sql = sql + ','.join(olist)
-            myConn.execute( sql )
-            olist = []
+        # if len(olist)==10000:
+        #     sql = " insert into `duobao_user_join_group` (`uid`,`msg`) values "
+        #     sql = sql + ','.join(olist)
+        #     myConn.execute( sql )
+        #     olist = []
         # except:
         #     print i + ' error.'
+        logs("('%s','%s'), " %(st[0], st[1]))
+def logs(data):
+    f = open('logs/log%s.sql' % str(date.today()), 'a+')
+    f.write(data+"\r\n")
+    f.close()
         
 if __name__=='__main__':
     # group_mail()
