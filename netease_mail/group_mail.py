@@ -57,15 +57,24 @@ def group_mail():
 
 def set_db(key):
     zsetlist = redisConn.smembers(key)
+    
+    olist = []
     for i in zsetlist:
         # try:
         st = i.split('====')
-        redisConn.execute(" insert into `duobao_user_join_group` (`uid`,`msg`) values (%s,%s) ", st[0],st[1] )
+        olist.append("('%s','%s')" %(st[1], st[2]) )
+
+        if len(olist)==10000:
+            sql = " insert into `duobao_user_join_group` (`uid`,`msg`) values "
+            sql = sql + ','.join(olist)
+            redisConn.execute( sql )
+            olist = []
         # except:
         #     print i + ' error.'
         
 if __name__=='__main__':
-    group_mail()
+    # group_mail()
+    set_db('zset_group_mail')
 
 
 
