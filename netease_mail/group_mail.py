@@ -51,15 +51,18 @@ def group_mail():
         print "page:%s. ok." % str(page)
 
     # 入库 
-    zsetlist = redisConn.smembers(key)
-    for i in zsetlist:
-        try:
-            st = i.split('====')
-            redisConn.execute(" insert into `duobao_user_join_group` (`uid`,`msg`) values (%s,%s) ", st[0],st[1] )
-        except:
-            print i + ' error.'
+    set_db(key)
 
     return True
+
+def set_db(key):
+    zsetlist = redisConn.smembers(key)
+    for i in zsetlist:
+        # try:
+        st = i.split('====')
+        redisConn.execute(" insert into `duobao_user_join_group` (`uid`,`msg`) values (%s,%s) ", st[0],st[1] )
+        # except:
+        #     print i + ' error.'
         
 if __name__=='__main__':
     group_mail()
